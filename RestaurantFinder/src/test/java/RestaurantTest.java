@@ -5,6 +5,8 @@ import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
@@ -69,5 +71,21 @@ class RestaurantTest {
                 ()->restaurant.removeFromMenu("French fries"));
     }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void correct_total_expected_when_given_string_list_input() {
 
+        List<String> orderDetails = new ArrayList<String>();
+        orderDetails.add("Sweet corn soup");
+        orderDetails.add("Vegetable lasagne");
+        assertEquals(388,restaurant.orderValue(orderDetails));
+    }
+
+    @Test
+    public void if_no_items_are_selected_returns_0_and_error_message() {
+
+        List<String> orderDetails = new ArrayList<String>();
+        assertEquals(0,restaurant.orderValue(orderDetails));
+
+
+    }
 }

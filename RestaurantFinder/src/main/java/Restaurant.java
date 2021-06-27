@@ -67,7 +67,10 @@ public class Restaurant {
         return name;
     }
 
+    public double orderValue(List<String> orderDetails)
+    {
 
+    }
 
 
 }
