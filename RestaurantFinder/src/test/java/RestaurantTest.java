@@ -4,9 +4,11 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mockito;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.*;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
@@ -16,7 +18,7 @@ class RestaurantTest {
     LocalTime openingTime = LocalTime.parse("10:30:00");
     LocalTime closingTime = LocalTime.parse("22:00:00");
 
-    @BeforeEach
+    @BeforeEach /* REFACTORED COMMON INITIALIZATIONS*/
     public void initEach(){
         restaurant =new Restaurant("Amelie's cafe","Chennai",openingTime,closingTime);
         restaurant.addToMenu("Sweet corn soup",119);
@@ -84,8 +86,10 @@ class RestaurantTest {
     public void if_no_items_are_selected_returns_0_and_error_message() {
 
         List<String> orderDetails = new ArrayList<String>();
+        final ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
         assertEquals(0,restaurant.orderValue(orderDetails));
-
+        assertEquals("No items have been selected", outContent.toString());
 
     }
 }

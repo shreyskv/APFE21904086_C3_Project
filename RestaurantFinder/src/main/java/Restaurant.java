@@ -54,7 +54,8 @@ public class Restaurant {
 
         menu.remove(itemToBeRemoved);
     }
-    public void displayDetails(){
+
+   public void displayDetails(){
         System.out.println("Restaurant:"+ name + "\n"
                 +"Location:"+ location + "\n"
                 +"Opening time:"+ openingTime +"\n"
@@ -67,10 +68,13 @@ public class Restaurant {
         return name;
     }
 
-    public double orderValue(List<String> orderDetails)
-    {
-
-    }
-
-
+    public double orderValue(List<String> orderDetails){
+        double total = 0;
+        if(orderDetails.size() == 0){
+            System.out.print("No items have been selected");
+            return 0;}
+        for(String k : orderDetails){
+            if(findItemByName(k) != null )
+                total = total + findItemByName(k).getPrice();}
+        return total ;}
 }
